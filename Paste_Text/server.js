@@ -29,6 +29,15 @@ app.get('/', (req, res) => {
 
 app.get('/paste/:id', pasteController.viewPaste);
 
+app.get('/api/healthz', (req, res) => {
+  res.status(200).json({
+    status: 'healthy',
+    message: 'Pastebin Lite API is running',
+    timestamp: new Date().toISOString(),
+    environment: config.NODE_ENV
+  });
+});
+
 app.use('/api/pastes', pasteRoutes);
 
 app.use(notFoundHandler);
