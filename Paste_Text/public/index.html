@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pastebin Lite</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .gradient-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-purple-50 to-blue-50 min-h-screen">
+  <div class="w-full max-w-4xl mx-auto">
+   
+    <main class="p-8">
+     
+      <section class="mb-12 bg-white rounded-xl shadow-lg p-8 border-l-4 border-blue-500">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Create New Paste</h2>
+        <form id="createForm" class="space-y-6">
+          <div class="form-group">
+            <label for="pasteContent" class="block text-gray-700 font-semibold mb-3">Paste Content:</label>
+            <textarea 
+              id="pasteContent" 
+              placeholder="Enter your text here..." 
+              rows="10"
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg font-mono text-sm focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition-all"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="expiresIn" class="block text-gray-700 font-semibold mb-3">Expires In (minutes):</label>
+            <input 
+              type="number" 
+              id="expiresIn" 
+              placeholder="Leave empty for no expiration"
+              min="1"
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition-all"
+            >
+            <small class="block text-gray-600 mt-2">Optional: Leave blank to keep permanently</small>
+          </div>
+
+          <button type="submit" class="btn-primary gradient-primary text-white px-8 py-3 rounded-lg font-bold hover:shadow-xl hover:scale-105 transition-all">
+           Create Paste
+          </button>
+        </form>
+
+        <div id="createResult" class="mt-6"></div>
+      </section>
+
+      <section class="mb-12 bg-white rounded-xl shadow-lg p-8 border-l-4 border-green-500">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Retrieve Paste</h2>
+        <form id="retrieveForm" class="space-y-6">
+          <div class="form-group">
+            <label for="pasteId" class="block text-gray-700 font-semibold mb-3">Paste ID:</label>
+            <input 
+              type="text" 
+              id="pasteId" 
+              placeholder="Enter paste ID" 
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-green-500 focus:ring-4 focus:ring-green-200 transition-all"
+              required
+            >
+          </div>
+          <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-bold hover:shadow-xl hover:scale-105 transition-all">
+                 Get Paste
+          </button>
+        </form>
+
+        <div id="retrieveResult" class="mt-6"></div>
+        
+        <div id="retrievedContent" style="display: none;" class="mt-6 bg-gray-50 p-6 rounded-lg border-l-4 border-blue-500">
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Paste Content:</h3>
+          <pre id="pasteContentDisplay" class="bg-white p-4 border border-gray-300 rounded font-mono text-sm overflow-x-auto max-h-96 overflow-y-auto"></pre>
+          <div class="mt-4 p-4 bg-white rounded border border-gray-300 space-y-2">
+            <p class="text-gray-700"><strong>Created:</strong> <span id="createdAtDisplay"></span></p>
+            <p class="text-gray-700"><strong>Expires:</strong> <span id="expiresAtDisplay"></span></p>
+          </div>
+          <button type="button" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-bold mt-4 hover:shadow-lg transition-all" id="deleteBtn">
+            Delete This Paste
+          </button>
+        </div>
+      </section>
+      <section class="bg-white rounded-xl shadow-lg p-8 border-l-4 border-purple-500">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">All Pastes</h2>
+        <button type="button" class="bg-purple-500 hover:bg-purple-600 text-white px-8 py-3 rounded-lg font-bold hover:shadow-xl hover:scale-105 transition-all" id="viewAllBtn">
+          View All Pastes
+        </button>
+        <div id="allPastesResult" class="mt-6"></div>
+      </section>
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
